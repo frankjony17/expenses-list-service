@@ -1,7 +1,7 @@
 # Expenses List Service
 This project was created to save time and money with features that make your shopping that much better.
 
-Its purpose is to make possible to check mutations in DNAs. With it you will be able to send a DNA sample and check whether it belongs to a simian or to a human and also check its stats.
+Its purpose is to make possible to TODO.
 
 Base URL: [https://www.expenses-list.com/](https://www.expenses-list.com/)
 
