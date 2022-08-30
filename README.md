@@ -33,6 +33,7 @@ Project
 │   ├── migrations
 │   ├── __init__.py
 │   ├── models.py
+│   ├── serializers.py
 │   ├── tests.py
 │   ├── urls.py
 │   └── views.py
@@ -49,12 +50,10 @@ Project
 ```
 
 # Requirements / Dependencies
-- [TODO](https://www.python.com/pt_BR/download/)
-- [TODO](https://todo.org/) to manage the project's build, reporting and documentation from a central piece of information;
-- ..
-- ..
-- ..
-- [Swagger](https://swagger.io/) for really useful and simple API documentation;
+- [Python = 3.10](https://www.python.org/downloads/release/python-3100/) a high-level, interpreted, general-purpose programming language.
+- [Django Rest Framework = 3.13.1](https://www.django-rest-framework.org/) a powerful and flexible toolkit for building Web APIs.
+- [PostgreSQL >= 10.22](https://www.postgresql.org/) a powerful, open source object-relational database system.
+- [Swagger](https://swagger.io/) for really useful and simple API documentation.
 
 # Running the application locally
 
