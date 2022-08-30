@@ -8,11 +8,11 @@ Base URL: [https://www.expenses-list.com/](https://www.expenses-list.com/)
 ### Tools
 
 This project is developed using the following technologies:
-- **Python;**
-- **Django REST framework;**
-- **PostgreSQL** as database;
-- **PyTest**, **APITestCase** and **Faker** for tests;
-- **Swagger**, **Redoc** for API Documentation;
+- **Python**.
+- **Django REST framework**.
+- **PostgreSQL** as database.
+- **PyTest**, **APITestCase** and **Faker** for tests.
+- **Swagger**, **Redoc** for API Documentation.
 
 ## Package Structure
 
