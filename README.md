@@ -18,19 +18,34 @@ This project is developed using the following technologies:
 
 ```
 Project
-├── todo
+├── core
 │   ├── __init__.py
 │   ├── settings.py
+│   └── urls.py
+├── expenses
+│   ├── migrations
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
 │   ├── urls.py
-├── db.sqlite3
-├── manage.py
-└── todo_api
-    ├── admin.py
-    ├── serializers.py
-    ├── __init__.py
-    ├── models.py
-    ├── urls.py
-    └── views.py     
+│   └── views.py
+├── products
+│   ├── migrations
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── shopping
+│   ├── migrations
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── .env
+├── requirements.txt
+└── manage.py
 ```
 
 # Requirements / Dependencies
