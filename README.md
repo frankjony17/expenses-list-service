@@ -18,14 +18,19 @@ This project is developed using the following technologies:
 
 ```
 Project
-├── expenses_list_service
-│   ├── configuration: TODO
-│   ├── controller: TODO
-│   ├── exception: Exception classes that help spring to handle Errors.
-│   ├── repository: TODO
-│   ├── service: TODO.          
-│   ├── utils : utilities that can be shared cross application
-│       
+├── todo
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+├── db.sqlite3
+├── manage.py
+└── todo_api
+    ├── admin.py
+    ├── serializers.py
+    ├── __init__.py
+    ├── models.py
+    ├── urls.py
+    └── views.py     
 ```
 
 # Requirements / Dependencies
