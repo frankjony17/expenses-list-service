@@ -25,6 +25,5 @@ urlpatterns = [
 
     path('api-token-auth/', views.obtain_auth_token, name='obtain_auth_token'),
     path('', include('rest_framework.urls', namespace='rest_framework')),
-
     path("products/", include("products.urls")),
 ]

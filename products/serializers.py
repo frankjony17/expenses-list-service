@@ -1,15 +1,25 @@
 
 from rest_framework import serializers
+from rest_framework import exceptions
+
 from products.models import ProductsType, ProductsCategory, Products
 
 
 class ProductsTypeSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        return ProductsType.objects.create(**validated_data)
+
     class Meta:
         model = ProductsType
         fields = ['id', 'type', 'description']
 
 
 class ProductsCategorySerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        return ProductsCategory.objects.create(**validated_data)
+
     class Meta:
         model = ProductsCategory
         fields = ['id', 'category', 'description']

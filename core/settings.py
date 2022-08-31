@@ -19,7 +19,7 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [env("ALLOWED_HOSTS", default="*")]
 
 
 # Application definition
@@ -157,3 +157,6 @@ SWAGGER_SETTINGS = {
     "SUPPORTED_SUBMIT_METHODS": ["get", "post", "put", "delete", "patch"],
     "VALIDATOR_URL": None,
 }
+
+
+APPEND_SLASH = True

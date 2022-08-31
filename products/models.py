@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ProductsType(models.Model):
-    type = models.CharField(max_length=120, blank=False)
+    type = models.CharField(max_length=120, blank=False, unique=True)
     description = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -16,7 +16,7 @@ class ProductsType(models.Model):
 
 
 class ProductsCategory(models.Model):
-    category = models.CharField(max_length=120, blank=False)
+    category = models.CharField(max_length=120, blank=False, unique=True)
     description = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
