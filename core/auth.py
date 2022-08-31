@@ -8,10 +8,6 @@ from rest_framework.exceptions import ValidationError, AuthenticationFailed
 from rest_framework.response import Response
 
 
-class AuthenticationFailedSerializer(serializers.Serializer):
-    default_detail = 'Incorrect authentication credentials.'
-
-
 @method_decorator(name='post', decorator=swagger_auto_schema(
     tags=['Token Authentication'],
     operation_description="This authentication scheme uses a simple token-based HTTP Authentication scheme.",
@@ -34,5 +30,3 @@ class AuthToken(ObtainAuthToken):
             return Response({'token': token.key})
         except ValidationError:
             raise AuthenticationFailed()
-
-
