@@ -45,3 +45,6 @@ class Products(models.Model):
     class Meta:
         db_table = "products"
         ordering = ['name']
+
+    def __str__(self):
+        return f"{self.name} - {self.estimated_price}"
