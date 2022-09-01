@@ -7,3 +7,4 @@ drf-yasg==1.21.3
 pytz==2022.2.1
 sqlparse==0.4.2
 psycopg2-binary==2.9.3
+flake8==5.0.4

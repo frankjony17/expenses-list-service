@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from products.models import ProductsType, ProductsCategory, Products
+from products.models import Products, ProductsCategory, ProductsType
 
 
 class ProductsTypeSerializer(serializers.ModelSerializer):
@@ -25,10 +25,16 @@ class ProductsCategorySerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
-    products_type = ProductsTypeSerializer()
-    products_category = ProductsCategorySerializer()
+
+    def create(self, validated_data):
+        return Products.objects.create(**validated_data)
 
     class Meta:
         model = Products
         fields = ['id', 'name', 'thumbnail', 'description',
                   'estimated_price', 'products_type', 'products_category', 'created_at']
+
+
+class ProductsListSerializer(ProductsSerializer):
+    products_type = ProductsTypeSerializer(many=False)
+    products_category = ProductsCategorySerializer(many=False)

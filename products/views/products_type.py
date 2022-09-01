@@ -8,15 +8,24 @@ from products.models import ProductsType
 from products.serializers import ProductsTypeSerializer
 
 
-@method_decorator(name='list', decorator=swagger_auto_schema(tags=['Products Type']))
-@method_decorator(name='retrieve', decorator=swagger_auto_schema(tags=['Products Type']))
+@method_decorator(name='list', decorator=swagger_auto_schema(
+    tags=['Products Type'],
+    operation_description="List of <b>ProductsType</b> (Used by <b>Product</b>)."
+))
+@method_decorator(name='retrieve', decorator=swagger_auto_schema(
+    tags=['Products Type'],
+    operation_description="Retrieve <b>ProductsType</b> by <b>id</b> (Used by <b>Product</b>)."
+))
 class ProductsTypeModelViewSet(ModelViewSet):
     queryset = ProductsType.objects.all()
     serializer_class = ProductsTypeSerializer
     pagination_class = None
     http_method_names = ['get', 'post', ]
 
-    @swagger_auto_schema(tags=['Products Type'])
+    @swagger_auto_schema(
+        tags=['Products Type'],
+        operation_description="Create <b>ProductsType</b> (Used by <b>Product</b>)."
+    )
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
 

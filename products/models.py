@@ -36,8 +36,11 @@ class Products(models.Model):
     estimated_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.00)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    products_type = models.ForeignKey(ProductsType, related_name="products", on_delete=models.SET_NULL, null=True)
-    products_category = models.ForeignKey(ProductsCategory, related_name="products", on_delete=models.SET_NULL, null=True)
+
+    products_type = models.ForeignKey(ProductsType, related_name="products",
+                                      on_delete=models.SET_NULL, null=True, blank=True)
+    products_category = models.ForeignKey(ProductsCategory, related_name="products",
+                                          on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         db_table = "products"
