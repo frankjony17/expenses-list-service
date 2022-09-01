@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -30,15 +31,17 @@ class ProductsCategory(models.Model):
 
 
 class Products(models.Model):
-    name = models.CharField(max_length=120, blank=False)
+    name = models.CharField(max_length=120, blank=False, unique=True)
     thumbnail = models.CharField(max_length=120, blank=True, default='')
     description = models.TextField(blank=True, default='')
     estimated_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.00)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="products", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    products_type = models.ForeignKey(ProductsType, related_name="products",
-                                      on_delete=models.SET_NULL, null=True, blank=True)
+    products_type = models.ForeignKey(
+        ProductsType, related_name="products", on_delete=models.SET_NULL, null=True, blank=True)
     products_category = models.ForeignKey(ProductsCategory, related_name="products",
                                           on_delete=models.SET_NULL, null=True, blank=True)
 

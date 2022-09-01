@@ -21,10 +21,19 @@ class ProductsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
-        fields = ['id', 'name', 'thumbnail', 'description',
-                  'estimated_price', 'products_type', 'products_category', 'created_at']
+        fields = [
+            'id',
+            'name',
+            'thumbnail',
+            'description',
+            'estimated_price',
+            'products_type',
+            'products_category',
+            'user'
+        ]
 
 
 class ProductsListSerializer(ProductsSerializer):
     products_type = ProductsTypeSerializer(many=False)
     products_category = ProductsCategorySerializer(many=False)
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
