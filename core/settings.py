@@ -35,9 +35,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
-    'expenses',
     'products',
     'shopping',
+    'expenses',
 ]
 
 MIDDLEWARE = [
