@@ -18,6 +18,7 @@ class ProductsCategorySerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Products
@@ -36,4 +37,3 @@ class ProductsSerializer(serializers.ModelSerializer):
 class ProductsListSerializer(ProductsSerializer):
     products_type = ProductsTypeSerializer(many=False)
     products_category = ProductsCategorySerializer(many=False)
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())

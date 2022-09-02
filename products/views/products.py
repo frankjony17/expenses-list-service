@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
 
@@ -27,9 +28,12 @@ from products.serializers import ProductsListSerializer, ProductsSerializer
     operation_description="Delete <b>Products</b> (Used by <b>Shopping</b>)."
 ))
 class ProductsModelViewSet(BaseModelViewSet):
-    queryset = Products.objects.all()
     serializers = {
         'default': ProductsSerializer,
         'list': ProductsListSerializer,
         'retrieve': ProductsListSerializer
     }
+
+    def get_queryset(self):
+        self.queryset = Products.objects.filter(Q(user=self.request.user.id) | Q(user=None))
+        return self.queryset
