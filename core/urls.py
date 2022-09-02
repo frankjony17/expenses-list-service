@@ -29,4 +29,5 @@ urlpatterns = [
     path('token-auth/', AuthToken.as_view(), name='obtain_auth_token'),
     path('', include('rest_framework.urls', namespace='rest_framework')),
     path("products/", include("products.urls")),
+    path("shopping/", include("shopping.urls")),
 ]

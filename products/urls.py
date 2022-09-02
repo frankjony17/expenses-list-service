@@ -12,5 +12,4 @@ router.register(r'category', ProductsCategoryModelViewSet, basename="products_ca
 # products
 router.register(r'', ProductsModelViewSet, basename="products")
 
-
 urlpatterns = [] + router.urls

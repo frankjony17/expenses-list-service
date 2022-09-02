@@ -13,7 +13,7 @@ class BaseModelViewSet(ModelViewSet):
         return self.serializers.get(self.action, self.serializers['default'])
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer_class()(data=request.data)
+        serializer = self.get_serializer_class()(data=request.data, context={'request': request})
 
         if serializer.is_valid():
             serializer.save()
@@ -23,7 +23,8 @@ class BaseModelViewSet(ModelViewSet):
 
     def update(self, request, pk=None, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer_class()(data=request.data, instance=instance)
+        serializer = self.get_serializer_class()(data=request.data, instance=instance,
+                                                 partial=True)
 
         if serializer.is_valid():
             serializer.save()
