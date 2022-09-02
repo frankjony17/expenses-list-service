@@ -9,7 +9,7 @@ from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from auth.serializers import RegisterUserSerializer
+from api_auth.serializers import RegisterUserSerializer
 
 
 @method_decorator(name='post', decorator=swagger_auto_schema(

@@ -1,7 +1,8 @@
 from django.urls import path
 
-from auth.views import AuthToken, RegisterUserView
+from api_auth.views import AuthToken, RegisterUserView
 
+app_name = 'api_auth'
 
 urlpatterns = [
     path('token', AuthToken.as_view(), name='token'),

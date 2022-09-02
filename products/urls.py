@@ -4,7 +4,7 @@ from products.views.products import ProductsModelViewSet
 from products.views.products_category import ProductsCategoryModelViewSet
 from products.views.products_type import ProductsTypeModelViewSet
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 # products-type
 router.register(r'type', ProductsTypeModelViewSet, basename="products_type")
 # products-category
@@ -12,4 +12,4 @@ router.register(r'category', ProductsCategoryModelViewSet, basename="products_ca
 # products
 router.register(r'', ProductsModelViewSet, basename="products")
 
-urlpatterns = [] + router.urls
+urlpatterns = router.urls
