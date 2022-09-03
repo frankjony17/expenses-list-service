@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.response import Response
 
 from base.views import BaseModelViewSet
 from products.models import Products
