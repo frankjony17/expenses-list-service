@@ -35,5 +35,8 @@ class ProductsModelViewSet(BaseModelViewSet):
     }
 
     def get_queryset(self):
-        self.queryset = Products.objects.filter(Q(user=self.request.user.id) | Q(user=None))
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            self.queryset = Products.objects.filter(user=None)
+        else:
+            self.queryset = Products.objects.filter(Q(user=self.request.user.id) | Q(user=None))
         return self.queryset
