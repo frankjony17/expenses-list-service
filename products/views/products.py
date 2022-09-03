@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.response import Response
 
 from base.views import BaseModelViewSet
 from products.models import Products
@@ -36,7 +37,11 @@ class ProductsModelViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         if self.request.user.is_staff or self.request.user.is_superuser:
-            self.queryset = Products.objects.filter(user=None)
+            self.queryset = Products.objects.filter(Q(owner__is_staff=True) |
+                                                    Q(owner__is_superuser=True))
         else:
-            self.queryset = Products.objects.filter(Q(user=self.request.user.id) | Q(user=None))
+            self.queryset = Products.objects.filter(
+                Q(owner=self.request.user.id) |
+                Q(owner__is_staff=True) |
+                Q(owner__is_superuser=True))
         return self.queryset

@@ -35,3 +35,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+
+class UserStaffSerializer(serializers.ModelSerializer):
+    is_staff = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['is_staff']

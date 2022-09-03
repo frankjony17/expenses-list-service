@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from api_auth.serializers import UserStaffSerializer
 from products.models import Products, ProductsCategory, ProductsType
 
 
@@ -18,7 +19,7 @@ class ProductsCategorySerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Products
@@ -30,10 +31,11 @@ class ProductsSerializer(serializers.ModelSerializer):
             'estimated_price',
             'products_type',
             'products_category',
-            'user'
+            'owner'
         ]
 
 
 class ProductsListSerializer(ProductsSerializer):
     products_type = ProductsTypeSerializer(many=False)
     products_category = ProductsCategorySerializer(many=False)
+    owner = UserStaffSerializer(many=False, read_only=True)

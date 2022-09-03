@@ -7,7 +7,8 @@ from products.models import Products
 @receiver(pre_save, sender=Products)
 def pre_save_products_receiver(sender, instance, raw, using, **kwargs):
     if instance.user.is_staff or instance.user.is_superuser:
-        instance.user = None
+        # instance.user = None
+        pass
 
 
 pre_save.connect(pre_save_products_receiver, sender=Products)

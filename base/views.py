@@ -23,8 +23,8 @@ class BaseModelViewSet(ModelViewSet):
 
     def update(self, request, pk=None, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer_class()(data=request.data, instance=instance,
-                                                 partial=True)
+        serializer = self.get_serializer_class()(
+            data=request.data, instance=instance, partial=True)
 
         if serializer.is_valid():
             serializer.save()
