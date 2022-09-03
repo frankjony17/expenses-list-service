@@ -32,7 +32,7 @@ urlpatterns = [
     # rest_framework urls.
     path('', include('rest_framework.urls', namespace='rest_framework')),
     # apps urls.
-    path(f"{API_V1}/auth", include("api_auth.urls", namespace='api_auth')),
+    path(f"{API_V1}/auth/", include("api_auth.urls", namespace='api_auth')),
     path(f"{API_V1}/products/", include("products.urls"), name="products"),
     path(f"{API_V1}/shopping/", include("shopping.urls"), name="shopping"),
 ]
