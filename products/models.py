@@ -35,7 +35,7 @@ class Products(models.Model):
     thumbnail = models.CharField(max_length=120, blank=True, default='')
     description = models.TextField(blank=True, default='')
     estimated_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.00)
-    owner = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="products", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

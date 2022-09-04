@@ -19,7 +19,7 @@ class ProductsCategorySerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
-    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Products
@@ -31,11 +31,11 @@ class ProductsSerializer(serializers.ModelSerializer):
             'estimated_price',
             'products_type',
             'products_category',
-            'owner'
+            'user'
         ]
 
 
 class ProductsListSerializer(ProductsSerializer):
     products_type = ProductsTypeSerializer(many=False)
     products_category = ProductsCategorySerializer(many=False)
-    owner = UserStaffSerializer(many=False, read_only=True)
+    user = UserStaffSerializer(many=False, read_only=True)
