@@ -18,3 +18,16 @@ class ShoppingSerializer(serializers.ModelSerializer):
             'created_at',
             'user'
         ]
+
+
+class ShoppingCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Shopping
+        fields = [
+            'id',
+            'description',
+            'amount_available',
+            'user'
+        ]

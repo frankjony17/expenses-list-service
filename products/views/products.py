@@ -48,24 +48,29 @@ class ProductsModelViewSet(BaseModelViewSet):
 
         return self.queryset
 
+    def create(self, request, *args, **kwargs):
+        if self.request.user.has_perm("products.add_products"):
+            return super().create(request, *args, **kwargs)
+        raise PermissionDenied()
+
     def update(self, request, pk=None, *args, **kwargs):
-        products = self.get_model_object(Products, pk=pk)
+        self.get_model_object(Products, pk=pk)
 
         match self.request.user.has_perm("products.change_products"):
-            case True if request.user == products.user:
+            case True if request.user == self.instance.user:
                 return super().update(request, pk, *args, **kwargs)
-            case True if request.user.is_staff and products.user.is_staff:
+            case True if request.user.is_staff and self.instance.user.is_staff:
                 return super().update(request, pk, *args, **kwargs)
             case _:
                 raise PermissionDenied()
 
     def destroy(self, request, pk=None, *args, **kwargs):
-        products = self.get_model_object(Products, pk=pk)
+        self.get_model_object(Products, pk=pk)
 
         match self.request.user.has_perm("products.delete_products"):
-            case True if request.user == products.user:
+            case True if request.user == self.instance.user:
                 return super().destroy(request, pk, *args, **kwargs)
-            case True if request.user.is_staff and products.user.is_staff:
+            case True if request.user.is_staff and self.instance.user.is_staff:
                 return super().destroy(request, pk, *args, **kwargs)
             case _:
                 raise PermissionDenied()

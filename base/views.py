@@ -45,6 +45,5 @@ class BaseModelViewSet(ModelViewSet):
                     self.instance = model.objects.get(pk=pk)
                 case None if not pk:
                     self.instance = self.get_object()
-            return self.instance
         except model.DoesNotExist:
             raise NotFound()
