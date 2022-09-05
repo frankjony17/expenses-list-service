@@ -34,30 +34,38 @@ class ProductsModelViewSet(BaseModelViewSet):
         'list': ProductsListSerializer,
         'retrieve': ProductsListSerializer
     }
+    model = Products
 
     def get_queryset(self):
-        if self.request.user.is_staff or self.request.user.is_superuser:
-            self.queryset = Products.objects.filter(Q(user__is_staff=True) |
-                                                    Q(user__is_superuser=True))
-        else:
-            self.queryset = Products.objects.filter(
-                Q(user=self.request.user.id) |
-                Q(user__is_staff=True) |
-                Q(user__is_superuser=True))
+        match self.request.user.has_perm("products.view_products"):
+            case True if self.request.user.is_staff:
+                self.queryset = self.model.objects.filter(Q(user__is_staff=True))
+            case True if not self.request.user.is_staff:
+                self.queryset = Products.objects.filter(Q(user=self.request.user.id) |
+                                                        Q(user__is_staff=True))
+            case _ if not self.swagger_fake_view:
+                raise PermissionDenied()
+
         return self.queryset
 
     def update(self, request, pk=None, *args, **kwargs):
-        if self.__has_permissions(request, pk):
-            return super().update(request, pk, *args, **kwargs)
+        products = self.get_model_object(Products, pk=pk)
+
+        match self.request.user.has_perm("products.change_products"):
+            case True if request.user == products.user:
+                return super().update(request, pk, *args, **kwargs)
+            case True if request.user.is_staff and products.user.is_staff:
+                return super().update(request, pk, *args, **kwargs)
+            case _:
+                raise PermissionDenied()
 
     def destroy(self, request, pk=None, *args, **kwargs):
-        if self.__has_permissions(request, pk):
-            return super().destroy(request, pk, *args, **kwargs)
+        products = self.get_model_object(Products, pk=pk)
 
-    @classmethod
-    def __has_permissions(cls, request, pk):
-        product = Products.objects.get(pk=pk)
-
-        if request.user == product.user or (request.user.is_staff and product.user.is_staff):
-            return True
-        raise PermissionDenied()
+        match self.request.user.has_perm("products.delete_products"):
+            case True if request.user == products.user:
+                return super().destroy(request, pk, *args, **kwargs)
+            case True if request.user.is_staff and products.user.is_staff:
+                return super().destroy(request, pk, *args, **kwargs)
+            case _:
+                raise PermissionDenied()

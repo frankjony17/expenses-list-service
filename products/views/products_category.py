@@ -1,5 +1,6 @@
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.exceptions import PermissionDenied
 
 from base.views import BaseModelViewSet
 from products.models import ProductsCategory
@@ -35,3 +36,18 @@ class ProductsCategoryModelViewSet(BaseModelViewSet):
     serializers = {
         'default': ProductsCategorySerializer
     }
+
+    def create(self, request, *args, **kwargs):
+        if self.request.user.is_staff:
+            return super().create(request, *args, **kwargs)
+        raise PermissionDenied()
+
+    def update(self, request, pk=None, *args, **kwargs):
+        if self.request.user.is_staff:
+            return super().update(request, pk, *args, **kwargs)
+        raise PermissionDenied()
+
+    def destroy(self, request, pk=None, *args, **kwargs):
+        if self.request.user.is_staff:
+            return super().destroy(request, pk, *args, **kwargs)
+        raise PermissionDenied()
