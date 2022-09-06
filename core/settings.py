@@ -17,7 +17,7 @@ environ.Env.read_env(f"{str(BASE_DIR)}/.env")
 SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(env("DEBUG", default=0))
 
 ALLOWED_HOSTS = [env("ALLOWED_HOSTS", default="*")]
 
@@ -122,7 +122,8 @@ DATE_FORMAT = '%Y-%m-%d'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
