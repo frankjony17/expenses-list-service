@@ -8,9 +8,9 @@ ENV SERVICE_HOME=/usr/src/apps/api
 
 # set work directory
 RUN mkdir -p $SERVICE_HOME
-RUN mkdir -p $SERVICE_HOME/staticfiles
+RUN mkdir $SERVICE_HOME/staticfiles
+RUN mkdir $SERVICE_HOME/mediafiles
 
-RUN chmod -R 777 $SERVICE_HOME/staticfiles/
 # where your code lives
 WORKDIR $SERVICE_HOME
 

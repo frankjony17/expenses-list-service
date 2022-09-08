@@ -5,12 +5,14 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    image: 811368550600.dkr.ecr.us-east-1.amazonaws.com/expenses-list-ec2:api
     command: >
       sh -c "python manage.py migrate && 
              python manage.py collectstatic --no-input --clear && 
              gunicorn core.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static_volume:/usr/src/apps/api/staticfiles
+      - media_volume:/usr/src/apps/api/mediafiles
     expose:
       - 8000
     env_file:
@@ -18,24 +20,17 @@ services:
     depends_on:
       - db
 
-  db:
-    image: postgres:13.0-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - .env
-    ports:
-      - "5432:5432"
-
   nginx-proxy:
     container_name: nginx-proxy
     build: nginx
+    image: 811368550600.dkr.ecr.us-east-1.amazonaws.com/expenses-list-ec2:nginx-proxy
     restart: always
     ports:
       - "443:443"
       - "80:80"
     volumes:
       - static_volume:/usr/src/apps/api/staticfiles
+      - media_volume:/usr/src/apps/api/mediafiles
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
       - vhost:/etc/nginx/vhost.d
@@ -57,8 +52,8 @@ services:
       - nginx-proxy
 
 volumes:
-  postgres_data:
   static_volume:
+  media_volume:
   certs:
   html:
   vhost:

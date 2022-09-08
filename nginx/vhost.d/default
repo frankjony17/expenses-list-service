@@ -4,6 +4,6 @@ location /static/ {
 }
 
 location /media/ {
-  alias /usr/src/apps/api/staticfiles/;
+  alias /usr/src/apps/api/mediafiles/;
   add_header Access-Control-Allow-Origin *;
 }
