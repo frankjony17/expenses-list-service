@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api_auth',
+    'base',
     'products',
     'shopping',
     'expenses',
@@ -149,6 +150,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
+    "EXCEPTION_HANDLER": "base.exceptions.base_exception_handler"
 }
 
 # https://drf-yasg.readthedocs.io/en/stable/readme.html#openapi-3-0-note

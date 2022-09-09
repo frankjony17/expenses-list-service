@@ -54,3 +54,12 @@ class PurchasesModelViewSet(BaseModelViewSet):
                 return super().create(request, *args, **kwargs)
         except ObjectDoesNotExist as exc:
             return Response(data={"products": [str(exc)]}, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None, *args, **kwargs):
+        self.get_model_object(Purchases, pk=pk)
+
+        match self.request.user.has_perm("shopping.change_purchases"):
+            case True if request.user == self.instance.shopping.user:
+                return super().update(request, pk, *args, **kwargs)
+            case _:
+                raise PermissionDenied()

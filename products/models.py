@@ -31,7 +31,7 @@ class ProductsCategory(models.Model):
 
 
 class Products(models.Model):
-    name = models.CharField(max_length=120, blank=False, unique=True)
+    name = models.CharField(max_length=120, unique=True, null=False, blank=False)
     thumbnail = models.CharField(max_length=120, blank=True, default='')
     description = models.TextField(blank=True, default='')
     estimated_price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.00)
