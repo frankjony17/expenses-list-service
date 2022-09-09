@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -10,6 +10,7 @@ class BaseModelViewSet(ModelViewSet):
     pagination_class = None
     http_method_names = ['get', 'post', 'put', 'delete']
     instance = None
+    swagger_fake_view = None
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
@@ -47,3 +48,8 @@ class BaseModelViewSet(ModelViewSet):
                     self.instance = self.get_object()
         except model.DoesNotExist:
             raise NotFound()
+
+    def raise_list_permission_denied(self):
+        if self.swagger_fake_view:
+            return self.queryset
+        raise PermissionDenied()

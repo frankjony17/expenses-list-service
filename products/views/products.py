@@ -43,9 +43,8 @@ class ProductsModelViewSet(BaseModelViewSet):
             case True if not self.request.user.is_staff:
                 self.queryset = Products.objects.filter(Q(user=self.request.user.id) |
                                                         Q(user__is_staff=True))
-            case _ if not self.swagger_fake_view:
-                raise PermissionDenied()
-
+            case _:
+                self.raise_list_permission_denied()
         return self.queryset
 
     def create(self, request, *args, **kwargs):

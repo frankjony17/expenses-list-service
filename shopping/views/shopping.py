@@ -28,7 +28,6 @@ from shopping.serializers import ShoppingCreateSerializer, ShoppingSerializer
     operation_description="Delete <b>Shopping</b>."
 ))
 class ShoppingModelViewSet(BaseModelViewSet):
-    queryset = Shopping.objects.all()
     serializers = {
         'default': ShoppingSerializer,
         'create': ShoppingCreateSerializer
@@ -37,11 +36,7 @@ class ShoppingModelViewSet(BaseModelViewSet):
     def get_queryset(self):
         if self.request.user.has_perm("shopping.view_shopping"):
             return Shopping.objects.filter(user=self.request.user.id)
-
-        if self.swagger_fake_view:
-            return self.queryset
-
-        raise PermissionDenied()
+        self.raise_list_permission_denied()
 
     def create(self, request, *args, **kwargs):
         if self.request.user.has_perm("shopping.add_shopping"):

@@ -1,6 +1,8 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
-from shopping.models import Shopping
+from products.serializers import ProductsSerializer
+from shopping.models import Shopping, Purchases
 
 
 class ShoppingSerializer(serializers.ModelSerializer):
@@ -30,4 +32,34 @@ class ShoppingCreateSerializer(serializers.ModelSerializer):
             'description',
             'amount_available',
             'user'
+        ]
+
+
+class PurchasesCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Purchases
+        fields = [
+            'id',
+            'shopping',
+            'products',
+            'price'
+        ]
+
+
+class PurchasesListSerializer(serializers.ModelSerializer):
+    products = ProductsSerializer(many=False)
+    shopping = ShoppingSerializer(many=False)
+
+    class Meta:
+        model = Purchases
+        fields = [
+            'id',
+            'products',
+            'quantity',
+            'price',
+            'price_date',
+            'unit',
+            'shopping',
+            'checked',
+            'created_at'
         ]
