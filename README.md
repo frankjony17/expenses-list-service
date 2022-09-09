@@ -3,7 +3,7 @@ This project was created to save time and money with features that make your sho
 
 Its purpose is to make possible to TODO.
 
-Base URL: [https://www.expenses-list.com/](https://www.expenses-list.com/)
+Base URL: [https://expenses-list.com/](https://expenses-list.com/)
 
 ### Tools
 
@@ -18,35 +18,54 @@ This project is developed using the following technologies:
 
 ```
 Project
+├── api_auth
+│   ├── __init__.py
+│   ├── receivers.py
+│   ├── serializers.py
+│   ├── urls.py
+│   └── views.py
+├── base
+│   ├── __init__.py
+│   └── views.py
 ├── core
 │   ├── __init__.py
+│   ├── receivers.py
 │   ├── settings.py
 │   └── urls.py
 ├── expenses
 │   ├── migrations
 │   ├── __init__.py
 │   ├── models.py
-│   ├── tests.py
 │   ├── urls.py
 │   └── views.py
 ├── products
+│   ├── fixtures
 │   ├── migrations
+│   ├── views
+│   │   ├── products.py
+│   │   ├── products_category.py
+│   │   └── products_type.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── receivers.py
+│   ├── serializers.py
+│   ├── urls.py
+├── shopping
+│   ├── migrations
+│   ├── views
+│   │   ├── purchases.py
+│   │   └── shopping.py
 │   ├── __init__.py
 │   ├── models.py
 │   ├── serializers.py
-│   ├── tests.py
 │   ├── urls.py
-│   └── views.py
-├── shopping
-│   ├── migrations
-│   ├── __init__.py
-│   ├── models.py
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
 ├── .env
-├── requirements.txt
-└── manage.py
+├── .flake8
+├── .gitignore
+├── docker-compose.staging.yml
+├── Dockerfile
+├── manage.py
+└── requirements.txt
 ```
 
 # Requirements / Dependencies
