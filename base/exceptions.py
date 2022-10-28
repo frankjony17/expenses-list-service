@@ -1,8 +1,8 @@
 from http import HTTPStatus
 from typing import Any
 
-from rest_framework.views import exception_handler
 from rest_framework.response import Response
+from rest_framework.views import exception_handler
 
 
 def base_exception_handler(exc: Exception, context: dict[str, Any]) -> Response:

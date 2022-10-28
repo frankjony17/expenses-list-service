@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
 
 from api_auth.serializers import UserStaffSerializer
 from products.models import Products, ProductsCategory, ProductsType

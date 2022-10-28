@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from base.views import BaseModelViewSet
 from products.models import Products
 from shopping.models import Purchases
-from shopping.serializers import PurchasesCreateSerializer, PurchasesListSerializer
+from shopping.serializers import (PurchasesCreateSerializer,
+                                  PurchasesListSerializer)
 
 
 @method_decorator(name='list', decorator=swagger_auto_schema(

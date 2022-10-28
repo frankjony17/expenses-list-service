@@ -8,5 +8,6 @@ class AuthConfig(AppConfig):
 
     def ready(self):
         from django.contrib.auth.models import User
+
         from .receivers import post_save_add_user_permissions
         post_save.connect(post_save_add_user_permissions, sender=User)

@@ -3,7 +3,6 @@ from django.db import models
 
 from products.models import Products
 
-
 UNIT_CHOICES = (
     (1, 'oz'),
     (2, 'lb'),

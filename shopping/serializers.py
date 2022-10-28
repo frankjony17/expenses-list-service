@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
 
 from products.serializers import ProductsSerializer
-from shopping.models import Shopping, Purchases
+from shopping.models import Purchases, Shopping
 
 
 class ShoppingSerializer(serializers.ModelSerializer):
