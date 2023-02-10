@@ -7,7 +7,6 @@ from rest_framework.viewsets import ModelViewSet
 class BaseModelViewSet(ModelViewSet):
     queryset = []
     serializers = {'default': None}
-    pagination_class = None
     http_method_names = ['get', 'post', 'put', 'delete']
     instance = None
     swagger_fake_view = None
@@ -37,6 +36,7 @@ class BaseModelViewSet(ModelViewSet):
 
     def destroy(self, request, pk=None, *args, **kwargs):
         self.perform_destroy(instance=self.get_model_object())
+
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get_model_object(self, model=None, pk=None):

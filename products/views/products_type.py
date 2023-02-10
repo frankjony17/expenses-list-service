@@ -32,6 +32,9 @@ class ProductsTypeModelViewSet(BaseModelViewSet):
     serializers = {
         'default': ProductsTypeSerializer
     }
+    paginate_by = 2
+    paginate_by_param = 'page_size'
+    max_paginate_by = 3
 
     def create(self, request, *args, **kwargs):
         if self.request.user.is_staff:
